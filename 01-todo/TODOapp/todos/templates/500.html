@@ -1,0 +1,13 @@
+{% extends "todos/base.html" %}
+
+{% block title %}Server Error - TODO App{% endblock %}
+
+{% block content %}
+<h1>500 - Server Error</h1>
+<p>Something went wrong on our side. Please try again later.</p>
+<p>
+    <a href="{% url 'todo_list' %}">
+        <button class="btn btn-primary">Back to TODOs</button>
+    </a>
+</p>
+{% endblock %}

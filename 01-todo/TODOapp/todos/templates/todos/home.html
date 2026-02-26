@@ -1,0 +1,62 @@
+{% extends "todos/base.html" %}
+
+{% block title %}Home - TODO App{% endblock %}
+
+{% block content %}
+
+<h1>My TODOs</h1>
+
+<!-- Create Button -->
+<a href="{% url 'todo_create' %}">
+    <button class="btn btn-primary">+ Add New TODO</button>
+</a>
+
+<hr>
+
+{% for todo in todos %}
+    <div class="card">
+
+        <div>
+            <h3 class="{% if todo.is_resolved %}resolved{% endif %}">
+                {{ todo.title }}
+            </h3>
+
+            {% if todo.description %}
+                <p>{{ todo.description }}</p>
+            {% endif %}
+
+            {% if todo.due_date %}
+                <p class="due-date">Due: {{ todo.due_date }}</p>
+            {% else %}
+                <p class="due-date">No due date</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <!-- Toggle Resolved -->
+            <form method="POST" action="{% url 'todo_toggle_resolved' todo.id %}" style="display:inline;">
+                {% csrf_token %}
+                {% if todo.is_resolved %}
+                    <button class="btn btn-warning">Mark Open</button>
+                {% else %}
+                    <button class="btn btn-success">Resolve</button>
+                {% endif %}
+            </form>
+
+            <!-- Edit -->
+            <a href="{% url 'todo_edit' todo.id %}">
+                <button class="btn btn-primary">Edit</button>
+            </a>
+
+            <!-- Delete -->
+            <a href="{% url 'todo_delete' todo.id %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </div>
+
+    </div>
+{% empty %}
+    <p>No TODOs yet. Create your first task 🚀</p>
+{% endfor %}
+
+{% endblock %}

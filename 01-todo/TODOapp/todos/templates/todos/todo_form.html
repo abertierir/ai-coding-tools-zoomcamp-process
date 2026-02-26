@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>{{ mode }} TODO</title>
+</head>
+<body style="font-family:system-ui; max-width:700px; margin:40px auto;">
+  <h1>{{ mode }} TODO</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{{ mode }}</button>
+    <a href="{% url 'todo_list' %}">Cancel</a>
+  </form>
+</body>
+</html>
