@@ -456,6 +456,27 @@ base.html (skeleton)
 4. **Clickjacking Protection**: X-Frame-Options middleware
 5. **HTTPS/SSL**: Configuration available in settings
 
+## ⚠️ Security Notes
+
+**IMPORTANT**: This configuration is for development only. Before deploying to production:
+
+- [ ] Change `SECRET_KEY` in `settings.py`
+- [ ] Set `DEBUG = False`
+- [ ] Configure `ALLOWED_HOSTS`
+- [ ] Use a production database (PostgreSQL, MySQL, etc.)
+- [ ] Configure static and media files
+- [ ] Implement HTTPS
+- [ ] Review all Django security settings
+
+## 📝 Technical Features
+
+- **Automatic sorting**: Tasks are displayed with open ones first, then by due date, and finally the most recent
+- **Case-insensitive search**: Search doesn't distinguish between uppercase and lowercase
+- **AJAX-ready markup**: Status toggle uses POST and redirects (easy to convert to AJAX)
+- **Form validation**: Django forms with built-in validation
+- **CSRF protection**: All forms include CSRF token
+- **Custom error pages**: Includes 404.html and 500.html templates
+
 ### Authentication Flow (Extensible)
 
 ```mermaid
