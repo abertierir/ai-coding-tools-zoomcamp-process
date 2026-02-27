@@ -2,8 +2,9 @@
 
 A web-based TODO task management application built with Django, allowing you to create, edit, delete, and mark tasks as completed.
 
-## � Documentation
+## 📖 Documentation
 
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Architecture diagrams, design patterns, and component structure
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Comprehensive deployment guide (Heroku, Railway, Docker, VPS)
 - **[LEARNING.md](LEARNING.md)** - Structured learning path for Django beginners to advanced
 
@@ -52,85 +53,7 @@ TODOapp/
             └── todo_confirm_delete.html     # Delete confirmation
 ```
 
-## 🏗️ Architecture
-
-### Application Architecture
-
-```mermaid
-graph TB
-    User[User Browser] --> Django[Django App]
-    Django --> Templates[Templates Layer]
-    Django --> Views[Views Layer]
-    Django --> Models[Models Layer]
-    Views --> Forms[Forms Layer]
-    Models --> DB[(SQLite Database)]
-    Templates --> Static[Static Files CSS/JS]
-
-    subgraph "Django Project"
-        Django
-        Templates
-        Views
-        Forms
-        Models
-    end
-```
-
-### Request Flow
-
-```mermaid
-sequenceDiagram
-    participant Browser
-    participant URLs
-    participant Views
-    participant Forms
-    participant Models
-    participant DB
-    participant Templates
-
-    Browser->>URLs: HTTP Request
-    URLs->>Views: Route to view function
-    Views->>Models: Query data
-    Models->>DB: SQL Query
-    DB-->>Models: Return data
-    Models-->>Views: Todo objects
-    Views->>Templates: Render with context
-    Templates-->>Views: HTML response
-    Views-->>Browser: HTTP Response
-```
-
-### Database Schema
-
-```mermaid
-erDiagram
-    TODO {
-        int id PK
-        string title
-        date due_date
-        boolean is_resolved
-        datetime created_at
-        datetime updated_at
-    }
-```
-
-### Component Interaction
-
-```mermaid
-graph LR
-    A[URL Router] --> B[View Functions]
-    B --> C{Request Type?}
-    C -->|GET| D[Retrieve Data]
-    C -->|POST| E[Process Form]
-    D --> F[Models]
-    E --> G[Form Validation]
-    G -->|Valid| F
-    G -->|Invalid| H[Return Errors]
-    F --> I[(Database)]
-    I --> J[Template Rendering]
-    H --> J
-    J --> K[HTTP Response]
-```
-
-## 🚀 Installation and Setup
+**For detailed architecture diagrams and design patterns, see [ARCHITECTURE.md](ARCHITECTURE.md)**
 
 ### Prerequisites
 
@@ -297,6 +220,12 @@ This is a learning/demonstration project. Feel free to:
 
 ## � Further Documentation
 
+- **[🏗️ ARCHITECTURE.md](ARCHITECTURE.md)** - Complete architecture documentation:
+  - MTV pattern and component diagrams
+  - Request/response flow with sequence diagrams
+  - Database schema and relationships
+  - Design patterns and best practices
+  - Scalability considerations
 - **[📦 DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide covering:
   - Heroku, Railway, and DigitalOcean deployment
   - Docker containerization
