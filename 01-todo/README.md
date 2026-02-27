@@ -60,21 +60,26 @@ TODOapp/
 ### Quick Start
 
 ```bash
-# 1. Navigate to project directory
+# 1. Clone the repository
+git clone <repository-url>
+cd AI\ Coding\ Tools  # or your workspace directory
+
+# 2. Navigate to the project directory
 cd 01-todo
 
-# 2. Create and activate virtual environment
-python3 -m venv venv
+# 3. Activate the virtual environment
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 3. Install Django
-pip install django==4.2.28
-
-# 4. Navigate to Django project
+# 4. Navigate to the Django project
 cd TODOapp
 
-# 5. Apply migrations and run server
+# 5. Apply migrations
 python manage.py migrate
+
+# 6. Create superuser (optional)
+python manage.py createsuperuser
+
+# 7. Start the development server
 python manage.py runserver
 ```
 
@@ -84,40 +89,47 @@ Then open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
 - Python 3.8 or higher
 - pip (Python package manager)
+- Git
 
 ### Detailed Installation Steps
 
-1. **Navigate to the project directory**
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd "AI Coding Tools"  # Navigate to your workspace
+   ```
+
+2. **Navigate to the project directory**
 
    ```bash
    cd 01-todo
    ```
 
-2. **Create and activate a virtual environment** (recommended)
+3. **Activate the virtual environment**
 
    ```bash
    # On macOS/Linux
-   python3 -m venv venv
    source venv/bin/activate
 
    # On Windows
-   python -m venv venv
    venv\Scripts\activate
    ```
 
-3. **Install Django**
+   > **Note**: If the virtual environment doesn't exist yet, create it first:
+   >
+   > ```bash
+   > python3 -m venv venv
+   > pip install django==4.2.28
+   > ```
 
-   ```bash
-   pip install django==4.2.28
-   ```
-
-4. **Change to the Django project directory**
+4. **Navigate to the Django project directory**
 
    ```bash
    cd TODOapp
    ```
 
-5. **Apply migrations**
+5. **Apply database migrations**
 
    ```bash
    python manage.py migrate
@@ -139,7 +151,7 @@ Then open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
    Visit: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-> **📝 Note**: The virtual environment is created in the `01-todo` directory, but Django commands (`manage.py`) must be run from the `01-todo/TODOapp` directory after activating the environment.
+> **📝 Note**: The virtual environment is located in the `01-todo` directory. Always activate it from there before changing to the `TODOapp` directory to run Django commands.
 
 ## 📖 Usage
 

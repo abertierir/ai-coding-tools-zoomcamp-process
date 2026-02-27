@@ -172,14 +172,23 @@ def book_list(request):
 
 #### Step 1: Set Up the TODO App (Day 1)
 
-1. **Clone and run the application**
+1. **Set up and run the application**
 
    ```bash
+   # Navigate to the project
    cd 01-todo
-   python -m venv venv
+
+   # Activate the virtual environment
    source venv/bin/activate  # or venv\Scripts\activate on Windows
-   pip install django
+
+   # If venv doesn't exist, create it first:
+   # python3 -m venv venv
+   # pip install django==4.2.28
+
+   # Navigate to Django project
    cd TODOapp
+
+   # Apply migrations and start server
    python manage.py migrate
    python manage.py runserver
    ```
@@ -187,6 +196,7 @@ def book_list(request):
 2. **Create a superuser and explore admin**
 
    ```bash
+   # From the TODOapp directory with venv activated
    python manage.py createsuperuser
    # Visit http://127.0.0.1:8000/admin/
    ```
