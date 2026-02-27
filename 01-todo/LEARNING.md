@@ -175,10 +175,11 @@ def book_list(request):
 1. **Clone and run the application**
 
    ```bash
-   cd 01-todo/TODOapp
+   cd 01-todo
    python -m venv venv
    source venv/bin/activate  # or venv\Scripts\activate on Windows
    pip install django
+   cd TODOapp
    python manage.py migrate
    python manage.py runserver
    ```
