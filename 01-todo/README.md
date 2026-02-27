@@ -2,12 +2,6 @@
 
 A web-based TODO task management application built with Django, allowing you to create, edit, delete, and mark tasks as completed.
 
-## 📖 Documentation
-
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Architecture diagrams, design patterns, and component structure
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Comprehensive deployment guide (Heroku, Railway, Docker, VPS)
-- **[LEARNING.md](LEARNING.md)** - Structured learning path for Django beginners to advanced
-
 ## �📋 Features
 
 - ✅ **Create tasks** with title and optional due date
@@ -25,35 +19,6 @@ A web-based TODO task management application built with Django, allowing you to 
 - **Django 4.2.28**
 - **SQLite3** (database)
 - **HTML/CSS** for templates
-
-## 📁 Project Structure
-
-```
-TODOapp/
-├── manage.py                 # Django management script
-├── db.sqlite3                # SQLite database
-├── TODOapp/                  # Main project directory
-│   ├── __init__.py
-│   ├── settings.py           # Project settings
-│   ├── urls.py               # Main URLs
-│   ├── wsgi.py               # WSGI configuration
-│   └── asgi.py               # ASGI configuration
-└── todos/                    # TODOs application
-    ├── models.py             # Todo model
-    ├── views.py              # Views (todo_list, todo_create, etc.)
-    ├── forms.py              # TodoForm
-    ├── urls.py               # App URLs
-    ├── admin.py              # Admin configuration
-    ├── migrations/           # Database migrations
-    └── templates/            # HTML templates
-        └── todos/
-            ├── base.html                    # Base template
-            ├── home.html                    # Task list
-            ├── todo_form.html               # Create/edit form
-            └── todo_confirm_delete.html     # Delete confirmation
-```
-
-**For detailed architecture diagrams and design patterns, see [ARCHITECTURE.md](ARCHITECTURE.md)**
 
 ## 🚀 Installation and Setup
 
@@ -153,28 +118,34 @@ Then open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
 > **📝 Note**: The virtual environment is located in the `01-todo` directory. Always activate it from there before changing to the `TODOapp` directory to run Django commands.
 
-## 📖 Usage
+## 📁 Project Structure
 
-### Main Interface
+```
+TODOapp/
+├── manage.py                 # Django management script
+├── db.sqlite3                # SQLite database
+├── TODOapp/                  # Main project directory
+│   ├── __init__.py
+│   ├── settings.py           # Project settings
+│   ├── urls.py               # Main URLs
+│   ├── wsgi.py               # WSGI configuration
+│   └── asgi.py               # ASGI configuration
+└── todos/                    # TODOs application
+    ├── models.py             # Todo model
+    ├── views.py              # Views (todo_list, todo_create, etc.)
+    ├── forms.py              # TodoForm
+    ├── urls.py               # App URLs
+    ├── admin.py              # Admin configuration
+    ├── migrations/           # Database migrations
+    └── templates/            # HTML templates
+        └── todos/
+            ├── base.html                    # Base template
+            ├── home.html                    # Task list
+            ├── todo_form.html               # Create/edit form
+            └── todo_confirm_delete.html     # Delete confirmation
+```
 
-- **View all tasks**: `/` - displays all tasks
-- **Filter by status**:
-  - `/?status=open` - only open tasks
-  - `/?status=resolved` - only completed tasks
-  - `/?status=all` - all tasks
-- **Search**: `/?q=term` - searches in titles
-
-### Available Actions
-
-1. **Create new task**: Click on "+ Add New TODO"
-2. **Mark as completed**: Click on "Resolve"
-3. **Mark as open**: Click on "Mark Open"
-4. **Edit task**: Click on "Edit"
-5. **Delete task**: Click on "Delete" and confirm
-
-### Admin Panel
-
-Access the Django admin panel at: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+**For detailed architecture diagrams and design patterns, see [ARCHITECTURE.md](ARCHITECTURE.md)**
 
 ## 📊 Data Model
 
