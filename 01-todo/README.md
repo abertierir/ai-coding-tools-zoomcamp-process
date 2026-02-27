@@ -2,7 +2,7 @@
 
 A web-based TODO task management application built with Django, allowing you to create, edit, delete, and mark tasks as completed.
 
-## �📋 Features
+## 📋 Features
 
 - ✅ **Create tasks** with title and optional due date
 - 📝 **Edit existing tasks**
@@ -13,42 +13,7 @@ A web-based TODO task management application built with Django, allowing you to 
 - 📅 **Automatic detection** of overdue tasks
 - 📊 **Smart sorting**: open tasks first, then by due date
 
-## 🛠️ Technologies Used
-
-- **Python 3.x**
-- **Django 4.2.28**
-- **SQLite3** (database)
-- **HTML/CSS** for templates
-
 ## 🚀 Installation and Setup
-
-### Quick Start
-
-```bash
-# 1. Clone the repository
-git clone <repository-url>
-cd AI\ Coding\ Tools  # or your workspace directory
-
-# 2. Navigate to the project directory
-cd 01-todo
-
-# 3. Activate the virtual environment
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# 4. Navigate to the Django project
-cd TODOapp
-
-# 5. Apply migrations
-python manage.py migrate
-
-# 6. Create superuser (optional)
-python manage.py createsuperuser
-
-# 7. Start the development server
-python manage.py runserver
-```
-
-Then open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
 ### Prerequisites
 
@@ -118,35 +83,6 @@ Then open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
 > **📝 Note**: The virtual environment is located in the `01-todo` directory. Always activate it from there before changing to the `TODOapp` directory to run Django commands.
 
-## 📁 Project Structure
-
-```
-TODOapp/
-├── manage.py                 # Django management script
-├── db.sqlite3                # SQLite database
-├── TODOapp/                  # Main project directory
-│   ├── __init__.py
-│   ├── settings.py           # Project settings
-│   ├── urls.py               # Main URLs
-│   ├── wsgi.py               # WSGI configuration
-│   └── asgi.py               # ASGI configuration
-└── todos/                    # TODOs application
-    ├── models.py             # Todo model
-    ├── views.py              # Views (todo_list, todo_create, etc.)
-    ├── forms.py              # TodoForm
-    ├── urls.py               # App URLs
-    ├── admin.py              # Admin configuration
-    ├── migrations/           # Database migrations
-    └── templates/            # HTML templates
-        └── todos/
-            ├── base.html                    # Base template
-            ├── home.html                    # Task list
-            ├── todo_form.html               # Create/edit form
-            └── todo_confirm_delete.html     # Delete confirmation
-```
-
-**For detailed architecture diagrams and design patterns, see [ARCHITECTURE.md](ARCHITECTURE.md)**
-
 ## 📊 Data Model
 
 ### `Todo` Model
@@ -182,51 +118,6 @@ TODOapp/
 - **Styles**: Modify templates in `todos/templates/todos/`
 - **Business logic**: Update `todos/views.py` and `todos/models.py`
 - **Configuration**: Adjust `TODOapp/settings.py`
-
-### Useful Commands
-
-> **Note**: Run these commands from the `01-todo/TODOapp` directory with the virtual environment activated.
-
-```bash
-# Create migrations after changes in models.py
-python manage.py makemigrations
-
-# Apply migrations
-python manage.py migrate
-
-# Run tests
-python manage.py test
-
-# Create a superuser
-python manage.py createsuperuser
-
-# Django shell (interactive)
-python manage.py shell
-
-# Collect static files (production)
-python manage.py collectstatic
-```
-
-## ⚠️ Security Notes
-
-**IMPORTANT**: This configuration is for development only. Before deploying to production:
-
-- [ ] Change `SECRET_KEY` in `settings.py`
-- [ ] Set `DEBUG = False`
-- [ ] Configure `ALLOWED_HOSTS`
-- [ ] Use a production database (PostgreSQL, MySQL, etc.)
-- [ ] Configure static and media files
-- [ ] Implement HTTPS
-- [ ] Review all Django security settings
-
-## 📝 Technical Features
-
-- **Automatic sorting**: Tasks are displayed with open ones first, then by due date, and finally the most recent
-- **Case-insensitive search**: Search doesn't distinguish between uppercase and lowercase
-- **AJAX-ready markup**: Status toggle uses POST and redirects (easy to convert to AJAX)
-- **Form validation**: Django forms with built-in validation
-- **CSRF protection**: All forms include CSRF token
-- **Custom error pages**: Includes 404.html and 500.html templates
 
 ## 🤝 Contributing
 
