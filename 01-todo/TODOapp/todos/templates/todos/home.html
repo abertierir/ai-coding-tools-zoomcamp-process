@@ -1,62 +1,71 @@
 {% extends "todos/base.html" %}
 
-{% block title %}Home - TODO App{% endblock %}
+{% block title %}My TODOs - TODO App{% endblock %}
 
 {% block content %}
 
-<h1>My TODOs</h1>
+<div class="page-header">
+    <h1>My TODO List</h1>
+    <p>Manage your tasks and stay organized</p>
+</div>
 
-<!-- Create Button -->
-<a href="{% url 'todo_create' %}">
-    <button class="btn btn-primary">+ Add New TODO</button>
-</a>
-
-<hr>
+<div class="mb-3">
+    <a href="{% url 'todo_create' %}" class="btn btn-primary">✨ Add New TODO</a>
+</div>
 
 {% for todo in todos %}
     <div class="card">
+        <div class="card-row">
+            <div class="card-content">
+                <h3 class="{% if todo.is_resolved %}resolved{% endif %}">
+                    {% if todo.is_resolved %}✓{% endif %} {{ todo.title }}
+                </h3>
 
-        <div>
-            <h3 class="{% if todo.is_resolved %}resolved{% endif %}">
-                {{ todo.title }}
-            </h3>
-
-            {% if todo.description %}
-                <p>{{ todo.description }}</p>
-            {% endif %}
-
-            {% if todo.due_date %}
-                <p class="due-date">Due: {{ todo.due_date }}</p>
-            {% else %}
-                <p class="due-date">No due date</p>
-            {% endif %}
-        </div>
-
-        <div>
-            <!-- Toggle Resolved -->
-            <form method="POST" action="{% url 'todo_toggle_resolved' todo.id %}" style="display:inline;">
-                {% csrf_token %}
-                {% if todo.is_resolved %}
-                    <button class="btn btn-warning">Mark Open</button>
-                {% else %}
-                    <button class="btn btn-success">Resolve</button>
+                {% if todo.description %}
+                    <p>{{ todo.description }}</p>
                 {% endif %}
-            </form>
 
-            <!-- Edit -->
-            <a href="{% url 'todo_edit' todo.id %}">
-                <button class="btn btn-primary">Edit</button>
-            </a>
+                {% if todo.due_date %}
+                    <p class="due-date {% if todo.is_overdue %}overdue{% endif %}">
+                        {% if todo.is_overdue and not todo.is_resolved %}
+                            ⚠️ Overdue: {{ todo.due_date|date:"M d, Y" }}
+                        {% else %}
+                            📅 Due: {{ todo.due_date|date:"M d, Y" }}
+                        {% endif %}
+                    </p>
+                {% else %}
+                    <p class="due-date text-muted">No due date</p>
+                {% endif %}
+            </div>
 
-            <!-- Delete -->
-            <a href="{% url 'todo_delete' todo.id %}">
-                <button class="btn btn-danger">Delete</button>
-            </a>
+            <div class="card-actions">
+                <!-- Toggle Resolved -->
+                <form method="POST" action="{% url 'todo_toggle_resolved' todo.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    {% if todo.is_resolved %}
+                        <button type="submit" class="btn btn-warning" title="Mark as open">Reopen</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-success" title="Mark as resolved">✓ Done</button>
+                    {% endif %}
+                </form>
+
+                <!-- Edit -->
+                <a href="{% url 'todo_edit' todo.id %}" class="btn btn-primary" title="Edit task">Edit</a>
+
+                <!-- Delete -->
+                <a href="{% url 'todo_delete' todo.id %}" class="btn btn-danger" title="Delete task">Delete</a>
+            </div>
         </div>
-
     </div>
 {% empty %}
-    <p>No TODOs yet. Create your first task 🚀</p>
+    <div class="card">
+        <div class="empty-state">
+            <div class="empty-state-icon">📝</div>
+            <h3>No TODOs Yet</h3>
+            <p class="text-muted">Create your first task to get started!</p>
+            <a href="{% url 'todo_create' %}" class="btn btn-primary mt-2">Create TODO</a>
+        </div>
+    </div>
 {% endfor %}
 
 {% endblock %}

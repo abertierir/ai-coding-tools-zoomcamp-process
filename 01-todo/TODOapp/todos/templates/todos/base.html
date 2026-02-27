@@ -6,69 +6,392 @@
     <title>{% block title %}TODO App{% endblock %}</title>
 
     <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: #f5f7fb;
+        /* Reset and Base Styles */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
         .navbar {
-            background-color: #4a6cf7;
-            color: white;
-            padding: 16px 24px;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand span {
+            font-size: 1.8rem;
+        }
+
+        .navbar-link {
+            color: #667eea;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .navbar-link:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header h1 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Status Styles */
         .resolved {
             text-decoration: line-through;
             opacity: 0.6;
+            color: #999;
         }
 
         .due-date {
-            font-size: 14px;
+            font-size: 0.875rem;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .overdue {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        /* Forms */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-help {
+            font-size: 0.875rem;
+            color: #888;
+            margin-top: 0.25rem;
+        }
+
+        .errorlist {
+            list-style: none;
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #63408a 100%);
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn-link {
+            background: none;
+            color: #667eea;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-link:hover {
+            background-color: #f0f0f0;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Alert/Message Boxes */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
             color: #666;
         }
 
-        .btn {
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
         }
 
-        .btn-primary { background-color: #4a6cf7; color: white; }
-        .btn-success { background-color: #2ecc71; color: white; }
-        .btn-danger { background-color: #e74c3c; color: white; }
-        .btn-warning { background-color: #f39c12; color: white; }
+        .empty-state h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
 
-        a { text-decoration: none; }
+        /* Divider */
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 2rem 0;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-muted { color: #888; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .card-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        📝 Django TODO Application
-    </div>
+    <nav class="navbar">
+        <a href="{% url 'todo_list' %}" class="navbar-brand">
+            <span>📝</span>
+            <span>TODO App</span>
+        </a>
+        <a href="{% url 'todo_list' %}" class="navbar-link">Home</a>
+    </nav>
 
     <div class="container">
         {% block content %}

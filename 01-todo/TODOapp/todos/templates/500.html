@@ -3,11 +3,12 @@
 {% block title %}Server Error - TODO App{% endblock %}
 
 {% block content %}
-<h1>500 - Server Error</h1>
-<p>Something went wrong on our side. Please try again later.</p>
-<p>
-    <a href="{% url 'todo_list' %}">
-        <button class="btn btn-primary">Back to TODOs</button>
-    </a>
-</p>
+<div class="form-container">
+    <div class="empty-state">
+        <div class="empty-state-icon">⚠️</div>
+        <h1 style="color: #e74c3c; margin-bottom: 1rem;">500 - Server Error</h1>
+        <p class="text-muted">Something went wrong on our side. Please try again later.</p>
+        <a href="{% url 'todo_list' %}" class="btn btn-primary mt-3">← Back to Home</a>
+    </div>
+</div>
 {% endblock %}

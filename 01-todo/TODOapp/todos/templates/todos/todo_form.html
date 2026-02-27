@@ -1,17 +1,47 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>{{ mode }} TODO</title>
-</head>
-<body style="font-family:system-ui; max-width:700px; margin:40px auto;">
-  <h1>{{ mode }} TODO</h1>
+{% extends "todos/base.html" %}
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{{ mode }}</button>
-    <a href="{% url 'todo_list' %}">Cancel</a>
-  </form>
-</body>
-</html>
+{% block title %}{{ mode }} TODO - TODO App{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>{{ mode }} TODO</h1>
+    <p>{% if mode == "Create" %}Add a new task to your list{% else %}Update your task details{% endif %}</p>
+</div>
+
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {% if field.field.required %}<span style="color: #e74c3c;">*</span>{% endif %}
+                </label>
+                {{ field }}
+                
+                {% if field.help_text %}
+                    <div class="form-help">{{ field.help_text }}</div>
+                {% endif %}
+                
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">
+                {% if mode == "Create" %}✨ Create TODO{% else %}💾 Save Changes{% endif %}
+            </button>
+            <a href="{% url 'todo_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
